@@ -1,9 +1,9 @@
 
-get_meta_data <- function(table, lang = "en"){
+get_meta_data <- function(table_id, lang){
 
   stopifnot(lang %in% c("da","en"))
 
-  opt = list(table = table, lang = lang, format = "JSON")
+  opt = list("table" = table_id, "lang" = lang, "format" = "JSON")
 
   result <- httr::POST(url = "https://api.statbank.dk/v1/tableinfo",
                        body = opt,
@@ -15,40 +15,49 @@ get_meta_data <- function(table, lang = "en"){
   meta <- httr::content(result) %>%
     jsonlite::fromJSON()
 
-  attr(meta, "table_lang") <- lang
-
   return(meta)
 }
 
-#################
-
-get_data <- function(x, format = "BULK"){
-
+create_query <- function(x, bulk){
   v <- vector(mode = "list", length = length(x))
   for (i in seq_along(v)){
     v[[i]] <- list(
       "code" = names(x)[[i]],
-      "values" = x[[i]]
+      "values" = I(x[[i]])
     )
   }
 
-  opt <- list(table = attr(x,"table_id"),
-              lang = attr(x,"table_lang"),
-              format = format,
-              delimiter = "Semicolon",
-              ValuePresentation = "Code",
-              variables = v)
+  if (bulk){
+    f <- "BULK"
+  } else {
+    f <- "CSV"
+  }
+
+  opt <- list("table" = attr(x,"table_id"),
+              "lang" = attr(x,"table_lang"),
+              "format" = f,
+              "delimiter" = "Semicolon",
+              "ValuePresentation" = "Code",
+              "variables" = v)
+
+  json <- jsonlite::toJSON(opt, auto_unbox = TRUE)
+
+  return(json)
+}
+
+get_data <- function(x, bulk = TRUE){
+
+  query <- create_query(x = x, bulk = bulk)
 
   result <- httr::POST(url = "https://api.statbank.dk/v1/data",
-                       body = opt,
-                       encode = "json",
-                       format = "BULK")
+                       body = query,
+                       encode = "raw",
+                       httr::content_type_json())
 
   httr::stop_for_status(result)
 
   out <- httr::content(result, as = "text") %>%
-    read.csv2(text = ., stringsAsFactors = FALSE) %>%
-    dplyr::as_tibble()
+    readr::read_csv2()
 
   return(out)
 }
