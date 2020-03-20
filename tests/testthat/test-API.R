@@ -4,14 +4,34 @@ test_that("multiplication works", {
 
 x <- tbl_dst(table_id = "FOLK1B", lang = "en")
 
+attributes(x)
+
 class(x)
 
 x
 
-# sloop::s3_dispatch(sample_n(x))
-# sloop::s3_dispatch(print(x))
+x %>%
+  head(6) %>%
+  collect() %>%
+  class()
+
+head(x,200)
 
 x %>%
-  sample_n(8) %>%
+  head(500) %>%
+  collect(bulk = F)
+
+x %>%
+  tail(6) %>%
   show_query() %>%
-  collect()
+  collect(bulk = F)
+
+x %>%
+  tail(2000) %>%
+  collect(bulk = F)
+
+x %>%
+  sample_n(300) %>%
+  collect(bulk = F)
+
+attr(x,"collect_rename") <- TRUE

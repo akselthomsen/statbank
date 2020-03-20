@@ -36,12 +36,18 @@ tbl_dst <- function(table_id, lang = "en"){
   attr(x, "var_text") <- meta_data[["variables"]][["text"]]
   attr(x, "var_time") <- meta_data[["variables"]][["time"]]
 
+  attr(x, "collect_rename") <- FALSE
+
   class(x) <- c("tbl_dst",class(x))
 
   return(x)
 }
 
-############################ done
+############################ extra manipulation
+
+
+
+############################ s3methods
 
 #' @export
 
@@ -53,6 +59,10 @@ collect.tbl_dst <- function(x, bulk = TRUE, ...){
     get_data(bulk = bulk) %>%
     read_dst_csv(x) %>%
     tibble::as_tibble()
+
+  if(attr(x, "collect_rename")){
+    names(y) <- toupper(c(attr(x, "var_text"), attr(x, "table_unit")))
+  }
 
   return(y)
 }
@@ -69,6 +79,8 @@ show_query.tbl_dst <- function(x, prettify = TRUE, ...){
     query <- jsonlite::prettify(query)
   }
 
+  cat("JSON")
+  cat("\n")
   cat(query)
   cat("\n")
 
@@ -82,11 +94,52 @@ print.tbl_dst <- function(x, n = 6L, ...){
   stopifnot(n %% 1 == 0)
 
   x %>%
-    sample_n(size = n) %>%
+    head(n = n) %>%
     collect(bulk = FALSE) %>%
     print()
 
   return(invisible(x))
+}
+
+#' @export
+
+head.tbl_dst <- function(x, n = 6L, ...){
+
+  stopifnot(n %% 1 == 0)
+
+  x[[1]] <- head(x[[1]],n)
+  n_comb <- length(x[[1]])
+
+  for (i in seq_along(x)[-1]){
+    x[[i]] <- head(x[[i]], max(n %/% n_comb + as.numeric(n_comb < n),1))
+    n_comb <- n_comb * length(x[[i]])
+  }
+
+  return(x)
+}
+
+#' @export
+
+tail.tbl_dst <- function(x, n = 6L, ...){
+
+  stopifnot(n %% 1 == 0)
+
+  a <- attributes(x)
+
+  x <- rev(x)
+
+  x[[1]] <- tail(x[[1]],n)
+  n_comb <- length(x[[1]])
+
+  for (i in seq_along(x)[-1]){
+    x[[i]] <- tail(x[[i]], max(n %/% n_comb + as.numeric(n_comb < n),1))
+    n_comb <- n_comb * length(x[[i]])
+  }
+
+  x <- rev(x)
+  attributes(x) <- a
+
+  return(x)
 }
 
 ############### to be improved
@@ -97,18 +150,25 @@ sample_n.tbl_dst <- function(tbl, size, ...){
 
   stopifnot(size %% 1 == 0)
 
-  y <- lapply(X = tbl, FUN = function(x) unique(sample(x, size = size, replace = TRUE)))
-  attributes(y) <- attributes(tbl)
+  n_comb_max <- prod(sapply(X = tbl, FUN = length))
 
-  return(y)
+  if (size >= n_comb_max){
+    x <- tbl
+  } else {
+
+    x <- lapply(X = tbl, FUN = function(x) sample(x = x, size = 1))
+    attributes(x) <- attributes(tbl)
+
+    n_comb <- 1
+    while(n_comb < size){
+      i <- sample(x = seq_along(x), size = 1)
+      j <- sample(x = seq_along(tbl[[i]]), size = 1)
+
+      x[[i]] <- unique(c(x[[i]], tbl[[i]][[j]]))
+      n_comb <- prod(sapply(X = x, FUN = length))
+    }
+
+  }
+
+  return(x)
 }
-
-#' @export
-
-head.tbl_dst <- function(x, n = 6L, ...){
-
-}
-
-#' @export
-
-tail.tbl_dst <- function(x, n = 6L, ...){}

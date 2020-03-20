@@ -48,8 +48,12 @@ class(x)
 
 x
 
+x %>% head()
+x %>% tail()
+
 x %>%
   sample_n(8) %>%
   show_query() %>%
-  collect()
+  collect(bulk = FALSE)
+
 ```
