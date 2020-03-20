@@ -8,21 +8,10 @@ class(x)
 
 x
 
-(y <- sample.tbl_dst(x, 2))
-
-x <- y
-
-x %>%
-  get_data(bulk = FALSE)
+# sloop::s3_dispatch(sample_n(x))
+# sloop::s3_dispatch(print(x))
 
 x %>%
-  get_data(bulk = TRUE)
-
-x %>%
-  show_query.tbl_dst(prettify = T) %>%
-  get_data()
-
-y <- print.tbl_dst(x)
-
-df <- x %>%
-  get_data()
+  sample_n(8) %>%
+  show_query() %>%
+  collect()

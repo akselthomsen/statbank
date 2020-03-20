@@ -1,14 +1,21 @@
 
-get_meta_data <- function(table_id, lang){
-
-  stopifnot(lang %in% c("da","en"))
+create_meta_query <- function(table_id, lang){
 
   opt = list("table" = table_id, "lang" = lang, "format" = "JSON")
 
+  json <- jsonlite::toJSON(opt, auto_unbox = TRUE)
+
+  return(json)
+}
+
+get_meta_data <- function(table_id, lang){
+
+  query <- create_meta_query(table_id = table_id, lang = lang)
+
   result <- httr::POST(url = "https://api.statbank.dk/v1/tableinfo",
-                       body = opt,
-                       encode = "json",
-                       format = "json")
+                       body = query,
+                       encode = "raw",
+                       httr::content_type_json())
 
   httr::stop_for_status(result)
 
@@ -18,7 +25,8 @@ get_meta_data <- function(table_id, lang){
   return(meta)
 }
 
-create_query <- function(x, bulk){
+create_data_query <- function(x, bulk){
+
   v <- vector(mode = "list", length = length(x))
   for (i in seq_along(v)){
     v[[i]] <- list(
@@ -45,9 +53,9 @@ create_query <- function(x, bulk){
   return(json)
 }
 
-get_data <- function(x, bulk = TRUE){
+get_data <- function(x, bulk){
 
-  query <- create_query(x = x, bulk = bulk)
+  query <- create_data_query(x = x, bulk = bulk)
 
   result <- httr::POST(url = "https://api.statbank.dk/v1/data",
                        body = query,
@@ -56,8 +64,7 @@ get_data <- function(x, bulk = TRUE){
 
   httr::stop_for_status(result)
 
-  out <- httr::content(result, as = "text") %>%
-    readr::read_csv2()
+  out <- httr::content(result, as = "text")
 
   return(out)
 }

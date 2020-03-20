@@ -17,4 +17,8 @@ RoxygenNote: 7.1.0
 Imports: 
     magrittr,
     httr,
-    jsonlite
+    jsonlite,
+    data.table,
+    tibble,
+    dplyr,
+    utils
