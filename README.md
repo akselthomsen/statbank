@@ -21,8 +21,8 @@ install.packages("statbank")
 And the development version from [GitHub](https://github.com/) with:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("akselthomsen/statbank")
+# install.packages("remotes")
+remotes::install_github("akselthomsen/statbank")
 ```
 
 ## Example
@@ -37,7 +37,9 @@ x <- tbl_dst(table_id = "FOLK1B", lang = "en")
 
 class(x)
 #> [1] "tbl_dst" "list"
+```
 
+``` r
 x
 #> # A tibble: 6 x 6
 #>   OMRÅDE KØN   ALDER STATSB TID    INDHOLD
@@ -48,7 +50,9 @@ x
 #> 4 147    TOT   IALT  0000   2008K1   93444
 #> 5 155    TOT   IALT  0000   2008K1   13261
 #> 6 185    TOT   IALT  0000   2008K1   40016
+```
 
+``` r
 x %>% head()
 #> # A tibble: 6 x 6
 #>   OMRÅDE KØN   ALDER STATSB TID    INDHOLD
@@ -69,63 +73,82 @@ x %>% tail()
 #> 4 851    2     100OV 5999   2019K3       0
 #> 5 851    2     100OV 5999   2019K4       0
 #> 6 851    2     100OV 5999   2020K1       0
+```
 
+``` r
 x %>%
   sample_n(8) %>%
   show_query() %>%
-  collect(bulk = FALSE)
-#> JSON
+  print() %>% 
+  use_bulk_download()
+#> <JSON>
 #> {
 #>     "table": "FOLK1B",
 #>     "lang": "en",
-#>     "format": "BULK",
+#>     "format": "CSV",
 #>     "delimiter": "Semicolon",
 #>     "ValuePresentation": "Code",
 #>     "variables": [
 #>         {
 #>             "code": "OMRÅDE",
 #>             "values": [
-#>                 "336"
+#>                 "420",
+#>                 "440"
 #>             ]
 #>         },
 #>         {
 #>             "code": "KØN",
 #>             "values": [
-#>                 "TOT",
 #>                 "1"
 #>             ]
 #>         },
 #>         {
 #>             "code": "ALDER",
 #>             "values": [
-#>                 "40-44",
-#>                 "0-4"
+#>                 "90-94",
+#>                 "10-14"
 #>             ]
 #>         },
 #>         {
 #>             "code": "STATSB",
 #>             "values": [
-#>                 "5130",
-#>                 "5129"
+#>                 "5356"
 #>             ]
 #>         },
 #>         {
 #>             "code": "TID",
 #>             "values": [
-#>                 "2011K2"
+#>                 "2009K1",
+#>                 "2014K4"
 #>             ]
 #>         }
 #>     ]
 #> }
-#> # A tibble: 8 x 6
+#> 
+#> # A tibble: 6 x 6
 #>   OMRÅDE KØN   ALDER STATSB TID    INDHOLD
 #>   <chr>  <chr> <chr> <chr>  <chr>    <dbl>
-#> 1 336    TOT   40-44 5130   2011K2       0
-#> 2 336    TOT   40-44 5129   2011K2       0
-#> 3 336    TOT   0-4   5130   2011K2       0
-#> 4 336    TOT   0-4   5129   2011K2       0
-#> 5 336    1     40-44 5130   2011K2       0
-#> 6 336    1     40-44 5129   2011K2       0
-#> 7 336    1     0-4   5130   2011K2       0
-#> 8 336    1     0-4   5129   2011K2       0
+#> 1 420    1     90-94 5356   2009K1       0
+#> 2 420    1     90-94 5356   2014K4       0
+#> 3 420    1     10-14 5356   2009K1       0
+#> 4 420    1     10-14 5356   2014K4       0
+#> 5 440    1     90-94 5356   2009K1       0
+#> 6 440    1     90-94 5356   2014K4       0
+#> # A tibble: 0 x 6
+#> # ... with 6 variables: OMRÅDE <chr>, KØN <chr>, ALDER <chr>, STATSB <chr>,
+#> #   TID <chr>, INDHOLD <dbl>
+```
+
+``` r
+x %>% 
+  use_names()
+#> # A tibble: 6 x 6
+#>   REGION SEX   AGE   CITIZENSHIP TIME    NUMBER
+#>   <chr>  <chr> <chr> <chr>       <chr>    <dbl>
+#> 1 000    TOT   IALT  0000        2008K1 5475791
+#> 2 084    TOT   IALT  0000        2008K1 1645825
+#> 3 101    TOT   IALT  0000        2008K1  509861
+#> 4 147    TOT   IALT  0000        2008K1   93444
+#> 5 155    TOT   IALT  0000        2008K1   13261
+#> 6 185    TOT   IALT  0000        2008K1   40016
 ```

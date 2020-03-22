@@ -24,16 +24,17 @@ The goal of statbank is to ...
 
 You can install the released version of statbank from [CRAN](https://CRAN.R-project.org) with:
 
-``` r
+```{r, eval=FALSE}
 install.packages("statbank")
 ```
 
 And the development version from [GitHub](https://github.com/) with:
 
-``` r
-# install.packages("devtools")
-devtools::install_github("akselthomsen/statbank")
+```{r, eval=FALSE}
+# install.packages("remotes")
+remotes::install_github("akselthomsen/statbank")
 ```
+
 ## Example
 
 This is a basic example which shows you how to solve a common problem:
@@ -45,15 +46,27 @@ library(statbank)
 x <- tbl_dst(table_id = "FOLK1B", lang = "en")
 
 class(x)
+```
 
+```{r}
 x
+```
 
+```{r}
 x %>% head()
 x %>% tail()
+```
 
+```{r}
 x %>%
   sample_n(8) %>%
   show_query() %>%
-  collect(bulk = FALSE)
-
+  print() %>% 
+  use_bulk_download()
 ```
+
+```{r}
+x %>% 
+  use_names()
+```
+
