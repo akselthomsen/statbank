@@ -66,6 +66,14 @@ x %>%
 ```
 
 ```{r}
+tbl_dst(table_id = "FOLK1B", lang = "en") %>% 
+  select(TID) %>% 
+  filter(stringr::str_detect(TID, "K4")) %>% 
+  collect()
+```
+
+
+```{r}
 x %>% 
   use_names()
 ```

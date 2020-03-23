@@ -10,6 +10,15 @@
 #' @usage lhs \%>\% rhs
 NULL
 
+#' rlang
+#'
+#' rlang
+#'
+#' @name rlang
+#' @rdname rlang
+#' @keywords internal
+#' @importFrom rlang := .data
+NULL
 
 #' Collect
 #'
@@ -20,7 +29,6 @@ NULL
 #' @keywords internal
 #' @export
 #' @importFrom dplyr collect
-#' @usage collect(...)
 NULL
 
 #' Sample_n
@@ -32,7 +40,6 @@ NULL
 #' @keywords internal
 #' @export
 #' @importFrom dplyr sample_n
-#' @usage sample_n(...)
 NULL
 
 #' show_query
@@ -44,7 +51,28 @@ NULL
 #' @keywords internal
 #' @export
 #' @importFrom dplyr show_query
-#' @usage show_query(...)
+NULL
+
+#' select
+#'
+#' See \code{dplyr::\link[dplyr:select]{select}} for details.
+#'
+#' @name select
+#' @rdname select
+#' @keywords internal
+#' @export
+#' @importFrom dplyr select
+NULL
+
+#' filter
+#'
+#' See \code{dplyr::\link[dplyr:select]{filter}} for details.
+#'
+#' @name filter
+#' @rdname filter
+#' @keywords internal
+#' @export
+#' @importFrom dplyr filter
 NULL
 
 #' head
@@ -56,7 +84,6 @@ NULL
 #' @keywords internal
 #' @export
 #' @importFrom utils head
-#' @usage head(...)
 NULL
 
 #' tail
@@ -68,5 +95,4 @@ NULL
 #' @keywords internal
 #' @export
 #' @importFrom utils tail
-#' @usage tail(...)
 NULL

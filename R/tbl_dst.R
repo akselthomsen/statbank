@@ -35,6 +35,7 @@ tbl_dst <- function(table_id, lang = "en"){
 
   attr(x, "var_text") <- meta_data[["variables"]][["text"]]
   attr(x, "var_time") <- meta_data[["variables"]][["time"]]
+  attr(x, "var_elimination") <- meta_data[["variables"]][["elimination"]]
 
   attr(x, "collect_bulk") <- FALSE
 
@@ -110,7 +111,7 @@ use_bulk_download <- function(x, bulk = TRUE){
   return(x)
 }
 
-############################ s3methods
+############################ s3methods - dplyr
 
 #' @export
 
@@ -160,66 +161,45 @@ show_query.tbl_dst <- function(x, prettify = TRUE, ...){
 
 #' @export
 
-print.tbl_dst <- function(x, n = 6L, ...){
+select.tbl_dst <- function(.data, ...){
 
-  stopifnot(n %% 1 == 0)
+  df <- data.frame(matrix(nrow = 0, ncol = length(.data)))
+  names(df) <- names(.data)
 
-  x %>%
-    head(n = n) %>%
-    collect(bulk = FALSE) %>%
-    print()
+  df <- dplyr::select(df, ...)
+  v <- match(names(df),names(.data))
 
-  return(invisible(x))
+  a <- attributes(.data)
+  a[["names"]] <- a[["names"]][v]
+  a[["var_text"]] <- a[["var_text"]][v]
+  a[["var_time"]] <- a[["var_time"]][v]
+  a[["var_elimination"]] <- a[["var_elimination"]][v]
+
+  out <- .data[v]
+  attributes(out) <- a
+
+  return(out)
 }
 
 #' @export
 
-head.tbl_dst <- function(x, n = 6L, ...){
+filter.tbl_dst <- function(.data, ...){
 
-  stopifnot(n %% 1 == 0)
+  dots <- rlang::enquos(...)
 
-  x[[1]] <- head(x[[1]],n)
-  n_comb <- nrow(x[[1]])
+  v1 <- lapply(X = dots, FUN = all.vars)
 
-  for (i in seq_along(x)[-1]){
-    x[[i]] <- head(x[[i]], max(n %/% n_comb + as.numeric(n_comb < n),1))
-    n_comb <- n_comb * nrow(x[[i]])
+  v2 <- match(v1, names(.data))
+
+  for (i in seq_along(dots)) {
+
+    .data[[v2[[i]]]] <- .data[[v2[[i]]]] %>%
+      dplyr::mutate(!!v1[[i]] := .data$id) %>%
+      dplyr::filter(!!rlang::quo_squash(dots[[i]])) %>%
+      dplyr::select(-!!v1[[i]])
   }
 
-  attr(x, "collect_head") <- n
-
-  return(x)
-}
-
-#' @export
-
-rev.tbl_dst <- function(x){
-
-  a <- attributes(x)
-  a[["names"]] <- rev(a[["names"]])
-
-  x <- rev.default(x)
-  x <- lapply(x, function(x) x[sort(seq_len(nrow(x)), decreasing = TRUE),])
-  attributes(x) <- a
-
-  return(x)
-}
-
-#' @export
-
-tail.tbl_dst <- function(x, n = 6L, ...){
-
-  stopifnot(n %% 1 == 0)
-
-  x <- x %>%
-    rev() %>%
-    head(n = n) %>%
-    rev()
-
-  attr(x, "collect_head") <- FALSE
-  attr(x, "collect_tail") <- n
-
-  return(x)
+  return(.data)
 }
 
 #' @export
@@ -251,6 +231,60 @@ sample_n.tbl_dst <- function(tbl, size, ...){
   }
 
   attr(x, "collect_sample") <- size
+
+  return(x)
+}
+
+############################ s3methods - base/utils
+
+#' @export
+
+print.tbl_dst <- function(x, n = 6L, ...){
+
+  stopifnot(n %% 1 == 0)
+
+  x %>%
+    head(n = n) %>%
+    collect() %>%
+    print()
+
+  return(invisible(x))
+}
+
+#' @export
+
+head.tbl_dst <- function(x, n = 6L, ...){
+
+  stopifnot(n %% 1 == 0)
+
+  x[[1]] <- head(x[[1]],n)
+  n_comb <- nrow(x[[1]])
+
+  for (i in seq_along(x)[-1]){
+    x[[i]] <- head(x[[i]], max(n %/% n_comb + as.numeric(n_comb < n),1))
+    n_comb <- n_comb * nrow(x[[i]])
+  }
+
+  attr(x, "collect_head") <- n
+
+  return(x)
+}
+
+#' @export
+
+tail.tbl_dst <- function(x, n = 6L, ...){
+
+  stopifnot(n %% 1 == 0)
+
+  x[[1]] <- tail(x[[1]],n)
+  n_comb <- nrow(x[[1]])
+
+  for (i in seq_along(x)[-1]){
+    x[[i]] <- tail(x[[i]], max(n %/% n_comb + as.numeric(n_comb < n),1))
+    n_comb <- n_comb * nrow(x[[i]])
+  }
+
+  attr(x, "collect_tail") <- n
 
   return(x)
 }

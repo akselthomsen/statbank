@@ -3,9 +3,6 @@
 \name{sample_n}
 \alias{sample_n}
 \title{Sample_n}
-\usage{
-sample_n(...)
-}
 \description{
 See \code{dplyr::\link[dplyr:collect]{sample_n}} for details.
 }

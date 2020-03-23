@@ -5,7 +5,7 @@ read_dst_csv <- function(text, x){
               "en" = ".",
               "da" = ",")
 
-  cc <- c(rep("character", 5),"numeric")
+  cc <- c(rep("character", length(x)),"numeric")
 
   out <- data.table::fread(text = text,
                     encoding = "UTF-8", sep = ";", dec = d,

@@ -3,9 +3,6 @@
 \name{collect}
 \alias{collect}
 \title{Collect}
-\usage{
-collect(...)
-}
 \description{
 See \code{dplyr::\link[dplyr:collect]{collect}} for details.
 }

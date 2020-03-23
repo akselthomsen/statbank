@@ -3,9 +3,6 @@
 \name{head}
 \alias{head}
 \title{head}
-\usage{
-head(...)
-}
 \description{
 See \code{utils::\link[utils:tail]{head}} for details.
 }

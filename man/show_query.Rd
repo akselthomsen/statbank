@@ -3,9 +3,6 @@
 \name{show_query}
 \alias{show_query}
 \title{show_query}
-\usage{
-show_query(...)
-}
 \description{
 See \code{dplyr::\link[dplyr:show_query]{show_query}} for details.
 }
