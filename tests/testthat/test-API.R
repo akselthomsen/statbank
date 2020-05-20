@@ -21,20 +21,20 @@ head(x,200)
 
 x %>%
   head(500) %>%
-  collect(bulk = F)
+  collect()
 
 x %>%
   tail(6) %>%
   show_query() %>%
-  collect(bulk = F)
+  collect()
 
 x %>%
   tail(2000) %>%
-  collect(bulk = F)
+  collect()
 
 x %>%
   sample_n(300) %>%
-  collect(bulk = F)
+  collect()
 
 x %>%
   sample_n(50) %>%
@@ -49,8 +49,20 @@ x %>%
   filter(CITIZENSHIP == "5100")
 
 x %>%
-  use_long_names(FALSE) %>%
   filter(STATSB == "0000")
+
+x %>%
+  filter(STATSB == "0000") %>%
+  use_long_names() %>%
+  use_labels() %>%
+  filter(AGE == "Total") %>%
+  use_labels(FALSE) %>%
+  use_long_names(FALSE) %>%
+  use_bulk_download() %>%
+  sample_n(1000) %>%
+  use_long_names() %>%
+  collect()
+
 
 x %>%
   use_long_names() %>%

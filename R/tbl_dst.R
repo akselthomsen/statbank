@@ -51,6 +51,24 @@ tbl_dst <- function(table_id, lang = "en"){
   return(x)
 }
 
+############################ internal
+
+#' is.tbl_dst
+#'
+#' \code{is.tbl_dst} renames to pretty names
+#'
+#' @param x [tbl_dst] output.
+#' @return [logical] TRUE/FALSE.
+#' @examples
+#'
+#' \dontrun{
+#' use_names(x)
+#' }
+
+is.tbl_dst <- function(x){
+  return(class(x)[[1]] == "tbl_dst")
+}
+
 ############################ extra manipulation
 
 #' Rename
@@ -69,8 +87,8 @@ tbl_dst <- function(table_id, lang = "en"){
 
 use_long_names <- function(x, value = TRUE){
 
-  stopifnot("tbl_dst" %in% class(x))
-  stopifnot(class(value) == "logical")
+  stopifnot(is.tbl_dst(x))
+  stopifnot(is.logical(value))
 
   attr(x, "collect_rename") <- value
 
@@ -88,8 +106,8 @@ use_long_names <- function(x, value = TRUE){
 
 use_labels <- function(x, value = TRUE){
 
-  stopifnot("tbl_dst" %in% class(x))
-  stopifnot(class(value) == "logical")
+  stopifnot(is.tbl_dst(x))
+  stopifnot(is.logical(value))
 
   attr(x, "collect_recode") <- value
 
@@ -107,7 +125,7 @@ use_labels <- function(x, value = TRUE){
 
 use_bulk_download <- function(x, bulk = TRUE){
 
-  stopifnot("tbl_dst" %in% class(x))
+  stopifnot(is.tbl_dst(x))
   stopifnot(is.logical(bulk))
 
   attr(x, "collect_bulk") <- bulk
