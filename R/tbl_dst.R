@@ -33,8 +33,8 @@ tbl_dst <- function(table_id, lang = "en"){
   attr(x, "table_text") <- meta_data[["text"]]
   attr(x, "table_unit") <- meta_data[["unit"]]
 
-  attr(x, "var_text") <- meta_data[["variables"]][["text"]]
-  attr(x, "var_time") <- meta_data[["variables"]][["time"]]
+  attr(x, "var_text") <- toupper(meta_data[["variables"]][["text"]])
+  attr(x, "var_time") <- toupper(meta_data[["variables"]][["time"]])
   attr(x, "var_elimination") <- meta_data[["variables"]][["elimination"]]
 
   attr(x, "collect_bulk") <- FALSE
@@ -55,9 +55,10 @@ tbl_dst <- function(table_id, lang = "en"){
 
 #' Rename
 #'
-#' \code{use_names} renames to pretty names
+#' \code{use_long_names} renames to pretty names
 #'
 #' @param x [tbl_dst] output.
+#' @param value [logical] TRUE/FALSE
 #' @return a [tbl_dst] object.
 #' @examples
 #'
@@ -66,28 +67,31 @@ tbl_dst <- function(table_id, lang = "en"){
 #' }
 #' @export
 
-use_names <- function(x){
+use_long_names <- function(x, value = TRUE){
 
   stopifnot("tbl_dst" %in% class(x))
+  stopifnot(class(value) == "logical")
 
-  attr(x, "collect_rename") <- TRUE
+  attr(x, "collect_rename") <- value
 
   return(x)
 }
 
-#' Encode
+#' Encode with labels
 #'
 #' \code{use_names} renames to pretty names
 #'
 #' @param x [tbl_dst] output.
+#' @param value [logical] TRUE/FALSE
 #' @return a [tbl_dst] object.
 #' @export
 
-use_names2 <- function(x){
+use_labels <- function(x, value = TRUE){
 
   stopifnot("tbl_dst" %in% class(x))
+  stopifnot(class(value) == "logical")
 
-  attr(x, "collect_rename") <- TRUE
+  attr(x, "collect_recode") <- value
 
   return(x)
 }
@@ -123,6 +127,11 @@ collect.tbl_dst <- function(x, ...){
     read_dst_csv(x) %>%
     tibble::as_tibble()
 
+  if(attr(x, "collect_recode")){
+   for (i in seq_along(x)){
+     df[[i]] <- x[[i]][["text"]][match(df[[i]],x[[i]][["id"]])]
+   }
+  }
   if(attr(x, "collect_rename")){
     names(df) <- toupper(c(attr(x, "var_text"), attr(x, "table_unit")))
   }
@@ -163,13 +172,25 @@ show_query.tbl_dst <- function(x, prettify = TRUE, ...){
 
 select.tbl_dst <- function(.data, ...){
 
+  a <- attributes(.data)
+
+  names_used <- a[["names"]]
+  if (a[["collect_rename"]]){
+    names_used <- a[["var_text"]]
+  }
+
   df <- data.frame(matrix(nrow = 0, ncol = length(.data)))
-  names(df) <- names(.data)
+  names(df) <- names_used
 
   df <- dplyr::select(df, ...)
-  v <- match(names(df),names(.data))
+  v <- match(names(df),names_used)
 
-  a <- attributes(.data)
+  if (any(!a[["var_elimination"]][-v])){
+    ve <- which(!a[["var_elimination"]][-v])
+    e <- paste("Variable(s)",paste(names_used[-v][ve], collapse = ", "),"can not be deselected")
+    stop(e)
+    }
+
   a[["names"]] <- a[["names"]][v]
   a[["var_text"]] <- a[["var_text"]][v]
   a[["var_time"]] <- a[["var_time"]][v]
@@ -189,12 +210,19 @@ filter.tbl_dst <- function(.data, ...){
 
   v1 <- lapply(X = dots, FUN = all.vars)
 
-  v2 <- match(v1, names(.data))
+  names_used <- names(.data)
+  if (attr(.data,"collect_rename")){
+    names_used <- attr(.data,"var_text")
+  }
+
+  v2 <- match(v1, names_used)
+
+  filter_var <- ifelse(attr(.data,"collect_recode"),"text","id")
 
   for (i in seq_along(dots)) {
 
     .data[[v2[[i]]]] <- .data[[v2[[i]]]] %>%
-      dplyr::mutate(!!v1[[i]] := .data$id) %>%
+      dplyr::mutate(!!v1[[i]] := .data[[filter_var]]) %>%
       dplyr::filter(!!rlang::quo_squash(dots[[i]])) %>%
       dplyr::select(-!!v1[[i]])
   }

@@ -4,6 +4,8 @@ test_that("multiplication works", {
 
 x <- tbl_dst(table_id = "FOLK1B", lang = "en")
 
+str(x)
+
 attributes(x)
 
 class(x)
@@ -34,4 +36,26 @@ x %>%
   sample_n(300) %>%
   collect(bulk = F)
 
-attr(x,"collect_rename") <- TRUE
+x %>%
+  sample_n(50) %>%
+  use_bulk_download() %>%
+  collect()
+
+x
+
+x %>%
+  use_long_names() %>%
+  select(CITIZENSHIP,TIME) %>%
+  filter(CITIZENSHIP == "5100")
+
+x %>%
+  use_long_names(FALSE) %>%
+  filter(STATSB == "0000")
+
+x %>%
+  use_long_names() %>%
+  use_labels() %>%
+  filter(REGION == "Frederiksberg") %>%
+  select(REGION,TIME) %>%
+  filter(TIME > "2016Q1") %>%
+  collect()
