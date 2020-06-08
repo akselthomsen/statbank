@@ -5,6 +5,8 @@
 
 <!-- badges: start -->
 
+[![Codecov test
+coverage](https://codecov.io/gh/akselthomsen/statbank/branch/master/graph/badge.svg)](https://codecov.io/gh/akselthomsen/statbank?branch=master)
 <!-- badges: end -->
 
 The goal of statbank is to …
@@ -97,34 +99,35 @@ x %>%
 #>         {
 #>             "code": "OMRÅDE",
 #>             "values": [
-#>                 "492",
-#>                 "482"
+#>                 "665"
 #>             ]
 #>         },
 #>         {
 #>             "code": "KØN",
 #>             "values": [
+#>                 "2",
 #>                 "TOT"
 #>             ]
 #>         },
 #>         {
 #>             "code": "ALDER",
 #>             "values": [
-#>                 "45-49",
-#>                 "90-94"
+#>                 "80-84",
+#>                 "65-69",
+#>                 "70-74"
 #>             ]
 #>         },
 #>         {
 #>             "code": "STATSB",
 #>             "values": [
-#>                 "5309"
+#>                 "5394"
 #>             ]
 #>         },
 #>         {
 #>             "code": "TID",
 #>             "values": [
-#>                 "2013K3",
-#>                 "2010K1"
+#>                 "2015K2",
+#>                 "2015K1"
 #>             ]
 #>         }
 #>     ]
@@ -133,12 +136,12 @@ x %>%
 #> # A tibble: 6 x 6
 #>   OMRÅDE KØN   ALDER STATSB TID    INDHOLD
 #>   <chr>  <chr> <chr> <chr>  <chr>    <dbl>
-#> 1 492    TOT   45-49 5309   2010K1       0
-#> 2 492    TOT   45-49 5309   2013K3       0
-#> 3 492    TOT   90-94 5309   2010K1       0
-#> 4 492    TOT   90-94 5309   2013K3       0
-#> 5 482    TOT   45-49 5309   2010K1       0
-#> 6 482    TOT   45-49 5309   2013K3       0
+#> 1 665    2     80-84 5394   2015K2       0
+#> 2 665    2     65-69 5394   2015K2       0
+#> 3 665    2     70-74 5394   2015K2       0
+#> 4 665    TOT   80-84 5394   2015K2       0
+#> 5 665    TOT   65-69 5394   2015K2       0
+#> 6 665    TOT   70-74 5394   2015K2       0
 #> # A tibble: 0 x 6
 #> # ... with 6 variables: OMRÅDE <chr>, KØN <chr>, ALDER <chr>, STATSB <chr>,
 #> #   TID <chr>, INDHOLD <dbl>
@@ -168,7 +171,7 @@ tbl_dst(table_id = "FOLK1B", lang = "en") %>%
 
 ``` r
 x %>% 
-  use_names()
+  use_long_names()
 #> # A tibble: 6 x 6
 #>   REGION SEX   AGE   CITIZENSHIP TIME    NUMBER
 #>   <chr>  <chr> <chr> <chr>       <chr>    <dbl>

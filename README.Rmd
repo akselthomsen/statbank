@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 # statbank
 
 <!-- badges: start -->
+[![Codecov test coverage](https://codecov.io/gh/akselthomsen/statbank/branch/master/graph/badge.svg)](https://codecov.io/gh/akselthomsen/statbank?branch=master)
 <!-- badges: end -->
 
 The goal of statbank is to ... 
@@ -75,6 +76,6 @@ tbl_dst(table_id = "FOLK1B", lang = "en") %>%
 
 ```{r}
 x %>% 
-  use_names()
+  use_long_names()
 ```
 
