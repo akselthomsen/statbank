@@ -7,6 +7,8 @@
 
 [![Codecov test
 coverage](https://codecov.io/gh/akselthomsen/statbank/branch/master/graph/badge.svg)](https://codecov.io/gh/akselthomsen/statbank?branch=master)
+[![Travis build
+status](https://travis-ci.com/akselthomsen/statbank.svg?branch=master)](https://travis-ci.com/akselthomsen/statbank)
 <!-- badges: end -->
 
 The goal of statbank is to …
@@ -99,35 +101,34 @@ x %>%
 #>         {
 #>             "code": "OMRÅDE",
 #>             "values": [
-#>                 "665"
+#>                 "580",
+#>                 "185"
 #>             ]
 #>         },
 #>         {
 #>             "code": "KØN",
 #>             "values": [
-#>                 "2",
 #>                 "TOT"
 #>             ]
 #>         },
 #>         {
 #>             "code": "ALDER",
 #>             "values": [
-#>                 "80-84",
-#>                 "65-69",
-#>                 "70-74"
+#>                 "35-39",
+#>                 "15-19"
 #>             ]
 #>         },
 #>         {
 #>             "code": "STATSB",
 #>             "values": [
-#>                 "5394"
+#>                 "5111"
 #>             ]
 #>         },
 #>         {
 #>             "code": "TID",
 #>             "values": [
-#>                 "2015K2",
-#>                 "2015K1"
+#>                 "2008K4",
+#>                 "2008K2"
 #>             ]
 #>         }
 #>     ]
@@ -136,12 +137,12 @@ x %>%
 #> # A tibble: 6 x 6
 #>   OMRÅDE KØN   ALDER STATSB TID    INDHOLD
 #>   <chr>  <chr> <chr> <chr>  <chr>    <dbl>
-#> 1 665    2     80-84 5394   2015K2       0
-#> 2 665    2     65-69 5394   2015K2       0
-#> 3 665    2     70-74 5394   2015K2       0
-#> 4 665    TOT   80-84 5394   2015K2       0
-#> 5 665    TOT   65-69 5394   2015K2       0
-#> 6 665    TOT   70-74 5394   2015K2       0
+#> 1 580    TOT   35-39 5111   2008K2       0
+#> 2 580    TOT   35-39 5111   2008K4       0
+#> 3 580    TOT   15-19 5111   2008K2       0
+#> 4 580    TOT   15-19 5111   2008K4       0
+#> 5 185    TOT   35-39 5111   2008K2       0
+#> 6 185    TOT   35-39 5111   2008K4       0
 #> # A tibble: 0 x 6
 #> # ... with 6 variables: OMRÅDE <chr>, KØN <chr>, ALDER <chr>, STATSB <chr>,
 #> #   TID <chr>, INDHOLD <dbl>
