@@ -5,10 +5,10 @@
 
 <!-- badges: start -->
 
-[![Codecov test
-coverage](https://codecov.io/gh/akselthomsen/statbank/branch/master/graph/badge.svg)](https://codecov.io/gh/akselthomsen/statbank?branch=master)
 [![Travis build
 status](https://travis-ci.com/akselthomsen/statbank.svg?branch=master)](https://travis-ci.com/akselthomsen/statbank)
+[![Codecov test
+coverage](https://codecov.io/gh/akselthomsen/statbank/branch/master/graph/badge.svg)](https://codecov.io/gh/akselthomsen/statbank?branch=master)
 <!-- badges: end -->
 
 The goal of statbank is to …
@@ -101,34 +101,34 @@ x %>%
 #>         {
 #>             "code": "OMRÅDE",
 #>             "values": [
-#>                 "580",
-#>                 "185"
+#>                 "157"
 #>             ]
 #>         },
 #>         {
 #>             "code": "KØN",
 #>             "values": [
-#>                 "TOT"
+#>                 "TOT",
+#>                 "1"
 #>             ]
 #>         },
 #>         {
 #>             "code": "ALDER",
 #>             "values": [
-#>                 "35-39",
-#>                 "15-19"
+#>                 "55-59",
+#>                 "5-9"
 #>             ]
 #>         },
 #>         {
 #>             "code": "STATSB",
 #>             "values": [
-#>                 "5111"
+#>                 "5180"
 #>             ]
 #>         },
 #>         {
 #>             "code": "TID",
 #>             "values": [
-#>                 "2008K4",
-#>                 "2008K2"
+#>                 "2008K1",
+#>                 "2013K4"
 #>             ]
 #>         }
 #>     ]
@@ -137,15 +137,21 @@ x %>%
 #> # A tibble: 6 x 6
 #>   OMRÅDE KØN   ALDER STATSB TID    INDHOLD
 #>   <chr>  <chr> <chr> <chr>  <chr>    <dbl>
-#> 1 580    TOT   35-39 5111   2008K2       0
-#> 2 580    TOT   35-39 5111   2008K4       0
-#> 3 580    TOT   15-19 5111   2008K2       0
-#> 4 580    TOT   15-19 5111   2008K4       0
-#> 5 185    TOT   35-39 5111   2008K2       0
-#> 6 185    TOT   35-39 5111   2008K4       0
-#> # A tibble: 0 x 6
-#> # ... with 6 variables: OMRÅDE <chr>, KØN <chr>, ALDER <chr>, STATSB <chr>,
-#> #   TID <chr>, INDHOLD <dbl>
+#> 1 157    TOT   55-59 5180   2008K1      14
+#> 2 157    TOT   55-59 5180   2013K4      19
+#> 3 157    TOT   5-9   5180   2008K1      18
+#> 4 157    TOT   5-9   5180   2013K4      14
+#> 5 157    1     55-59 5180   2008K1       8
+#> 6 157    1     55-59 5180   2013K4      10
+#> # A tibble: 6 x 6
+#>   OMRÅDE KØN   ALDER STATSB TID    INDHOLD
+#>   <chr>  <chr> <chr> <chr>  <chr>    <dbl>
+#> 1 157    1     5-9   5180   2008K1      10
+#> 2 157    1     55-59 5180   2008K1       8
+#> 3 157    TOT   5-9   5180   2008K1      18
+#> 4 157    TOT   55-59 5180   2008K1      14
+#> 5 157    1     5-9   5180   2013K4       8
+#> 6 157    1     55-59 5180   2013K4      10
 ```
 
 ``` r
