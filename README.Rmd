@@ -27,7 +27,7 @@ The goal of statbank is to ...
 You can install the released version of statbank from [CRAN](https://CRAN.R-project.org) with:
 
 ```{r, eval=FALSE}
-install.packages("statbank")
+# install.packages("statbank")
 ```
 
 And the development version from [GitHub](https://github.com/) with:

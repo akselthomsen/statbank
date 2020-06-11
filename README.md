@@ -19,7 +19,7 @@ You can install the released version of statbank from
 [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
-install.packages("statbank")
+# install.packages("statbank")
 ```
 
 And the development version from [GitHub](https://github.com/) with:
@@ -101,7 +101,7 @@ x %>%
 #>         {
 #>             "code": "OMRÅDE",
 #>             "values": [
-#>                 "157"
+#>                 "326"
 #>             ]
 #>         },
 #>         {
@@ -114,21 +114,21 @@ x %>%
 #>         {
 #>             "code": "ALDER",
 #>             "values": [
-#>                 "55-59",
-#>                 "5-9"
+#>                 "100OV",
+#>                 "70-74"
 #>             ]
 #>         },
 #>         {
 #>             "code": "STATSB",
 #>             "values": [
-#>                 "5180"
+#>                 "5277"
 #>             ]
 #>         },
 #>         {
 #>             "code": "TID",
 #>             "values": [
-#>                 "2008K1",
-#>                 "2013K4"
+#>                 "2012K1",
+#>                 "2018K3"
 #>             ]
 #>         }
 #>     ]
@@ -137,21 +137,15 @@ x %>%
 #> # A tibble: 6 x 6
 #>   OMRÅDE KØN   ALDER STATSB TID    INDHOLD
 #>   <chr>  <chr> <chr> <chr>  <chr>    <dbl>
-#> 1 157    TOT   55-59 5180   2008K1      14
-#> 2 157    TOT   55-59 5180   2013K4      19
-#> 3 157    TOT   5-9   5180   2008K1      18
-#> 4 157    TOT   5-9   5180   2013K4      14
-#> 5 157    1     55-59 5180   2008K1       8
-#> 6 157    1     55-59 5180   2013K4      10
-#> # A tibble: 6 x 6
-#>   OMRÅDE KØN   ALDER STATSB TID    INDHOLD
-#>   <chr>  <chr> <chr> <chr>  <chr>    <dbl>
-#> 1 157    1     5-9   5180   2008K1      10
-#> 2 157    1     55-59 5180   2008K1       8
-#> 3 157    TOT   5-9   5180   2008K1      18
-#> 4 157    TOT   55-59 5180   2008K1      14
-#> 5 157    1     5-9   5180   2013K4       8
-#> 6 157    1     55-59 5180   2013K4      10
+#> 1 326    TOT   100OV 5277   2012K1       0
+#> 2 326    TOT   100OV 5277   2018K3       0
+#> 3 326    TOT   70-74 5277   2012K1       0
+#> 4 326    TOT   70-74 5277   2018K3       0
+#> 5 326    1     100OV 5277   2012K1       0
+#> 6 326    1     100OV 5277   2018K3       0
+#> # A tibble: 0 x 6
+#> # ... with 6 variables: OMRÅDE <chr>, KØN <chr>, ALDER <chr>, STATSB <chr>,
+#> #   TID <chr>, INDHOLD <dbl>
 ```
 
 ``` r
