@@ -69,16 +69,21 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install the released version of statbank from <a href="https://CRAN.R-project.org">CRAN</a> with:</p>
-<div class="sourceCode" id="cb1"><pre class="r"># install.packages("statbank")</pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="co"># install.packages("statbank")</span>
+</pre></div>
 <p>And the development version from <a href="https://github.com/">GitHub</a> with:</p>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="co"># install.packages("remotes")</span>
-<span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"akselthomsen/statbank"</span>)</pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="co"># install.packages("remotes")</span>
+<span class="kw">remotes</span>::<span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"akselthomsen/statbank"</span>)
+</pre></div>
 </div>
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h2>
 <p>This is a basic example which shows you how to solve a common problem:</p>
-<div class="sourceCode" id="cb3"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">statbank</span>)
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">statbank</span>)
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Attaching package: 'statbank'</span>
 <span class="co">#&gt; The following object is masked from 'package:stats':</span>
@@ -86,21 +91,13 @@
 <span class="co">#&gt;     filter</span>
 <span class="co">## basic example code</span>
 
-<span class="no">x</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/tbl_dst.html">tbl_dst</a></span>(<span class="kw">table_id</span> <span class="kw">=</span> <span class="st">"FOLK1B"</span>, <span class="kw">lang</span> <span class="kw">=</span> <span class="st">"en"</span>)
+<span class="kw">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tbl_dst.html">tbl_dst</a></span>(table_id = <span class="st">"FOLK1B"</span>, lang = <span class="st">"en"</span>)
 
-<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span>(<span class="no">x</span>)
-<span class="co">#&gt; [1] "tbl_dst" "list"</span></pre></div>
-<div class="sourceCode" id="cb4"><pre class="r"><span class="no">x</span>
-<span class="co">#&gt; # A tibble: 6 x 6</span>
-<span class="co">#&gt;   OMRÅDE KØN   ALDER STATSB TID    INDHOLD</span>
-<span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 000    TOT   IALT  0000   2008K1 5475791</span>
-<span class="co">#&gt; 2 084    TOT   IALT  0000   2008K1 1645825</span>
-<span class="co">#&gt; 3 101    TOT   IALT  0000   2008K1  509861</span>
-<span class="co">#&gt; 4 147    TOT   IALT  0000   2008K1   93444</span>
-<span class="co">#&gt; 5 155    TOT   IALT  0000   2008K1   13261</span>
-<span class="co">#&gt; 6 185    TOT   IALT  0000   2008K1   40016</span></pre></div>
-<div class="sourceCode" id="cb5"><pre class="r"><span class="no">x</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="reference/head.html">head</a></span>()
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span>(<span class="kw">x</span>)
+<span class="co">#&gt; [1] "tbl_dst" "list"</span>
+</pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="kw">x</span>
 <span class="co">#&gt; # A tibble: 6 x 6</span>
 <span class="co">#&gt;   OMRÅDE KØN   ALDER STATSB TID    INDHOLD</span>
 <span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt;</span>
@@ -110,7 +107,19 @@
 <span class="co">#&gt; 4 147    TOT   IALT  0000   2008K1   93444</span>
 <span class="co">#&gt; 5 155    TOT   IALT  0000   2008K1   13261</span>
 <span class="co">#&gt; 6 185    TOT   IALT  0000   2008K1   40016</span>
-<span class="no">x</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="reference/tail.html">tail</a></span>()
+</pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="kw">x</span> <span class="op">%&gt;%</span> <span class="fu"><a href="reference/head.html">head</a></span>()
+<span class="co">#&gt; # A tibble: 6 x 6</span>
+<span class="co">#&gt;   OMRÅDE KØN   ALDER STATSB TID    INDHOLD</span>
+<span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 000    TOT   IALT  0000   2008K1 5475791</span>
+<span class="co">#&gt; 2 084    TOT   IALT  0000   2008K1 1645825</span>
+<span class="co">#&gt; 3 101    TOT   IALT  0000   2008K1  509861</span>
+<span class="co">#&gt; 4 147    TOT   IALT  0000   2008K1   93444</span>
+<span class="co">#&gt; 5 155    TOT   IALT  0000   2008K1   13261</span>
+<span class="co">#&gt; 6 185    TOT   IALT  0000   2008K1   40016</span>
+<span class="kw">x</span> <span class="op">%&gt;%</span> <span class="fu"><a href="reference/tail.html">tail</a></span>()
 <span class="co">#&gt; # A tibble: 6 x 6</span>
 <span class="co">#&gt;   OMRÅDE KØN   ALDER STATSB TID    INDHOLD</span>
 <span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt;</span>
@@ -119,11 +128,13 @@
 <span class="co">#&gt; 3 840    2     100OV 5999   2020K2       0</span>
 <span class="co">#&gt; 4 787    2     100OV 5999   2020K2       0</span>
 <span class="co">#&gt; 5 820    2     100OV 5999   2020K2       0</span>
-<span class="co">#&gt; 6 851    2     100OV 5999   2020K2       0</span></pre></div>
-<div class="sourceCode" id="cb6"><pre class="r"><span class="no">x</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="reference/sample_n.html">sample_n</a></span>(<span class="fl">8</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="reference/show_query.html">show_query</a></span>() <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>() <span class="kw">%&gt;%</span>
+<span class="co">#&gt; 6 851    2     100OV 5999   2020K2       0</span>
+</pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="kw">x</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="reference/sample_n.html">sample_n</a></span>(<span class="fl">8</span>) <span class="op">%&gt;%</span>
+  <span class="fu"><a href="reference/show_query.html">show_query</a></span>() <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>() <span class="op">%&gt;%</span> 
   <span class="fu"><a href="reference/use_bulk_download.html">use_bulk_download</a></span>()
 <span class="co">#&gt; &lt;JSON&gt;</span>
 <span class="co">#&gt; {</span>
@@ -180,10 +191,12 @@
 <span class="co">#&gt; 6 326    1     100OV 5277   2018K3       0</span>
 <span class="co">#&gt; # A tibble: 0 x 6</span>
 <span class="co">#&gt; # ... with 6 variables: OMRÅDE &lt;chr&gt;, KØN &lt;chr&gt;, ALDER &lt;chr&gt;, STATSB &lt;chr&gt;,</span>
-<span class="co">#&gt; #   TID &lt;chr&gt;, INDHOLD &lt;dbl&gt;</span></pre></div>
-<div class="sourceCode" id="cb7"><pre class="r"><span class="fu"><a href="reference/tbl_dst.html">tbl_dst</a></span>(<span class="kw">table_id</span> <span class="kw">=</span> <span class="st">"FOLK1B"</span>, <span class="kw">lang</span> <span class="kw">=</span> <span class="st">"en"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="reference/select.html">select</a></span>(<span class="no">TID</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="reference/filter.html">filter</a></span>(<span class="kw pkg">stringr</span><span class="kw ns">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span>(<span class="no">TID</span>, <span class="st">"K4"</span>)) <span class="kw">%&gt;%</span>
+<span class="co">#&gt; #   TID &lt;chr&gt;, INDHOLD &lt;dbl&gt;</span>
+</pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit">
+<span class="fu"><a href="reference/tbl_dst.html">tbl_dst</a></span>(table_id = <span class="st">"FOLK1B"</span>, lang = <span class="st">"en"</span>) <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="reference/select.html">select</a></span>(<span class="kw">TID</span>) <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="reference/filter.html">filter</a></span>(<span class="kw">stringr</span>::<span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span>(<span class="kw">TID</span>, <span class="st">"K4"</span>)) <span class="op">%&gt;%</span> 
   <span class="fu"><a href="reference/collect.html">collect</a></span>()
 <span class="co">#&gt; # A tibble: 12 x 2</span>
 <span class="co">#&gt;    TID    INDHOLD</span>
@@ -199,8 +212,10 @@
 <span class="co">#&gt;  9 2016K4 5745526</span>
 <span class="co">#&gt; 10 2017K4 5778570</span>
 <span class="co">#&gt; 11 2018K4 5806015</span>
-<span class="co">#&gt; 12 2019K4 5827463</span></pre></div>
-<div class="sourceCode" id="cb8"><pre class="r"><span class="no">x</span> <span class="kw">%&gt;%</span>
+<span class="co">#&gt; 12 2019K4 5827463</span>
+</pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit">
+<span class="kw">x</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="reference/use_long_names.html">use_long_names</a></span>()
 <span class="co">#&gt; # A tibble: 6 x 6</span>
 <span class="co">#&gt;   REGION SEX   AGE   CITIZENSHIP TIME    NUMBER</span>
@@ -210,7 +225,8 @@
 <span class="co">#&gt; 3 101    TOT   IALT  0000        2008K1  509861</span>
 <span class="co">#&gt; 4 147    TOT   IALT  0000        2008K1   93444</span>
 <span class="co">#&gt; 5 155    TOT   IALT  0000        2008K1   13261</span>
-<span class="co">#&gt; 6 185    TOT   IALT  0000        2008K1   40016</span></pre></div>
+<span class="co">#&gt; 6 185    TOT   IALT  0000        2008K1   40016</span>
+</pre></div>
 </div>
 </div>
   </div>
@@ -246,7 +262,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>
