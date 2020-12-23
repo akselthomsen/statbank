@@ -9,6 +9,9 @@
 status](https://travis-ci.com/akselthomsen/statbank.svg?branch=master)](https://travis-ci.com/akselthomsen/statbank)
 [![Codecov test
 coverage](https://codecov.io/gh/akselthomsen/statbank/branch/master/graph/badge.svg)](https://codecov.io/gh/akselthomsen/statbank?branch=master)
+[![R build
+status](https://github.com/akselthomsen/statbank/workflows/R-CMD-check/badge.svg)](https://github.com/akselthomsen/statbank/actions)
+[![CodeFactor](https://www.codefactor.io/repository/github/akselthomsen/statbank/badge)](https://www.codefactor.io/repository/github/akselthomsen/statbank)
 <!-- badges: end -->
 
 The goal of statbank is to …
@@ -76,12 +79,12 @@ x %>% tail()
 #> # A tibble: 6 x 6
 #>   OMRÅDE KØN   ALDER STATSB TID    INDHOLD
 #>   <chr>  <chr> <chr> <chr>  <chr>    <dbl>
-#> 1 846    2     100OV 5999   2020K2       0
-#> 2 773    2     100OV 5999   2020K2       0
-#> 3 840    2     100OV 5999   2020K2       0
-#> 4 787    2     100OV 5999   2020K2       0
-#> 5 820    2     100OV 5999   2020K2       0
-#> 6 851    2     100OV 5999   2020K2       0
+#> 1 846    2     100OV 5999   2020K4       0
+#> 2 773    2     100OV 5999   2020K4       0
+#> 3 840    2     100OV 5999   2020K4       0
+#> 4 787    2     100OV 5999   2020K4       0
+#> 5 820    2     100OV 5999   2020K4       0
+#> 6 851    2     100OV 5999   2020K4       0
 ```
 
 ``` r
@@ -101,34 +104,35 @@ x %>%
 #>         {
 #>             "code": "OMRÅDE",
 #>             "values": [
-#>                 "326"
+#>                 "607"
 #>             ]
 #>         },
 #>         {
 #>             "code": "KØN",
 #>             "values": [
-#>                 "TOT",
-#>                 "1"
+#>                 "2",
+#>                 "TOT"
 #>             ]
 #>         },
 #>         {
 #>             "code": "ALDER",
 #>             "values": [
-#>                 "100OV",
-#>                 "70-74"
+#>                 "10-14",
+#>                 "95-99"
 #>             ]
 #>         },
 #>         {
 #>             "code": "STATSB",
 #>             "values": [
-#>                 "5277"
+#>                 "5356",
+#>                 "5122",
+#>                 "5402"
 #>             ]
 #>         },
 #>         {
 #>             "code": "TID",
 #>             "values": [
-#>                 "2012K1",
-#>                 "2018K3"
+#>                 "2011K3"
 #>             ]
 #>         }
 #>     ]
@@ -137,12 +141,12 @@ x %>%
 #> # A tibble: 6 x 6
 #>   OMRÅDE KØN   ALDER STATSB TID    INDHOLD
 #>   <chr>  <chr> <chr> <chr>  <chr>    <dbl>
-#> 1 326    TOT   100OV 5277   2012K1       0
-#> 2 326    TOT   100OV 5277   2018K3       0
-#> 3 326    TOT   70-74 5277   2012K1       0
-#> 4 326    TOT   70-74 5277   2018K3       0
-#> 5 326    1     100OV 5277   2012K1       0
-#> 6 326    1     100OV 5277   2018K3       0
+#> 1 607    2     10-14 5356   2011K3       0
+#> 2 607    2     10-14 5122   2011K3       0
+#> 3 607    2     95-99 5356   2011K3       0
+#> 4 607    2     95-99 5122   2011K3       0
+#> 5 607    TOT   10-14 5356   2011K3       0
+#> 6 607    TOT   10-14 5122   2011K3       0
 #> # A tibble: 0 x 6
 #> # ... with 6 variables: OMRÅDE <chr>, KØN <chr>, ALDER <chr>, STATSB <chr>,
 #> #   TID <chr>, INDHOLD <dbl>
@@ -153,7 +157,7 @@ tbl_dst(table_id = "FOLK1B", lang = "en") %>%
   select(TID) %>% 
   filter(stringr::str_detect(TID, "K4")) %>% 
   collect()
-#> # A tibble: 12 x 2
+#> # A tibble: 13 x 2
 #>    TID    INDHOLD
 #>    <chr>    <dbl>
 #>  1 2008K4 5505995
@@ -168,6 +172,7 @@ tbl_dst(table_id = "FOLK1B", lang = "en") %>%
 #> 10 2017K4 5778570
 #> 11 2018K4 5806015
 #> 12 2019K4 5827463
+#> 13 2020K4 5837213
 ```
 
 ``` r

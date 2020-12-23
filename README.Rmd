@@ -18,6 +18,8 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 [![Travis build status](https://travis-ci.com/akselthomsen/statbank.svg?branch=master)](https://travis-ci.com/akselthomsen/statbank)
 [![Codecov test coverage](https://codecov.io/gh/akselthomsen/statbank/branch/master/graph/badge.svg)](https://codecov.io/gh/akselthomsen/statbank?branch=master)
+[![R build status](https://github.com/akselthomsen/statbank/workflows/R-CMD-check/badge.svg)](https://github.com/akselthomsen/statbank/actions)
+[![CodeFactor](https://www.codefactor.io/repository/github/akselthomsen/statbank/badge)](https://www.codefactor.io/repository/github/akselthomsen/statbank)
 <!-- badges: end -->
 
 The goal of statbank is to ... 
