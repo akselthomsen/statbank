@@ -34,7 +34,6 @@ test_that(
         sample_n(50) %>%
         use_bulk_download() %>%
         collect()
-
     )
     expect_visible(
       x %>%
@@ -55,18 +54,16 @@ test_that(
   {
     expect_equal(
       x %>%
-        class()
-      ,
+        class(),
       x %>%
         use_long_names() %>%
-        select(CITIZENSHIP,TIME) %>%
+        select(CITIZENSHIP, TIME) %>%
         filter(CITIZENSHIP == "5100") %>%
         class()
     )
     expect_equal(
       x %>%
-        attributes()
-      ,
+        attributes(),
       x %>%
         filter(STATSB == "0000") %>%
         attributes()
@@ -95,7 +92,7 @@ test_that(
         use_long_names() %>%
         use_labels() %>%
         filter(REGION == "Frederiksberg") %>%
-        select(REGION,TIME) %>%
+        select(REGION, TIME) %>%
         filter(TIME > "2016Q1") %>%
         collect()
     )
