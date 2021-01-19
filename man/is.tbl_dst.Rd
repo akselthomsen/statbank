@@ -20,4 +20,5 @@ is.tbl_dst(x)
 \dontrun{
 use_names(x)
 }
+
 }

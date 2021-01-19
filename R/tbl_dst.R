@@ -218,12 +218,19 @@ select.tbl_dst <- function(.data, ...) {
 filter.tbl_dst <- function(.data, ...) {
   dots <- rlang::enquos(...)
 
-  v1 <- lapply(X = dots, FUN = all.vars)
-
   names_used <- names(.data)
   if (attr(.data, "collect_rename")) {
     names_used <- attr(.data, "var_text")
   }
+
+  v1 <- lapply(X = dots, FUN = all.vars) %>%
+    lapply(intersect, y = names_used)
+
+  if(any(unlist(lapply(v1, length)) != 1)){
+    stop("Each filter can only use one variable from the API")
+  }
+
+  v1 <- unlist(v1)
 
   v2 <- match(v1, names_used)
 
