@@ -5,13 +5,9 @@
 
 <!-- badges: start -->
 
-[![Travis build
-status](https://travis-ci.com/akselthomsen/statbank.svg?branch=master)](https://travis-ci.com/akselthomsen/statbank)
+[![R-CMD-check](https://github.com/akselthomsen/statbank/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/akselthomsen/statbank/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
-coverage](https://codecov.io/gh/akselthomsen/statbank/branch/master/graph/badge.svg)](https://codecov.io/gh/akselthomsen/statbank?branch=master)
-[![R build
-status](https://github.com/akselthomsen/statbank/workflows/R-CMD-check/badge.svg)](https://github.com/akselthomsen/statbank/actions)
-[![CodeFactor](https://www.codefactor.io/repository/github/akselthomsen/statbank/badge)](https://www.codefactor.io/repository/github/akselthomsen/statbank)
+coverage](https://codecov.io/gh/akselthomsen/statbank/graph/badge.svg)](https://app.codecov.io/gh/akselthomsen/statbank)
 <!-- badges: end -->
 
 The goal of statbank is to …
@@ -53,7 +49,7 @@ class(x)
 
 ``` r
 x
-#> # A tibble: 6 x 6
+#> # A tibble: 6 × 6
 #>   OMRÅDE KØN   ALDER STATSB TID    INDHOLD
 #>   <chr>  <chr> <chr> <chr>  <chr>    <dbl>
 #> 1 000    TOT   IALT  0000   2008K1 5475791
@@ -66,7 +62,7 @@ x
 
 ``` r
 x %>% head()
-#> # A tibble: 6 x 6
+#> # A tibble: 6 × 6
 #>   OMRÅDE KØN   ALDER STATSB TID    INDHOLD
 #>   <chr>  <chr> <chr> <chr>  <chr>    <dbl>
 #> 1 000    TOT   IALT  0000   2008K1 5475791
@@ -76,15 +72,15 @@ x %>% head()
 #> 5 155    TOT   IALT  0000   2008K1   13261
 #> 6 185    TOT   IALT  0000   2008K1   40016
 x %>% tail()
-#> # A tibble: 6 x 6
+#> # A tibble: 6 × 6
 #>   OMRÅDE KØN   ALDER STATSB TID    INDHOLD
 #>   <chr>  <chr> <chr> <chr>  <chr>    <dbl>
-#> 1 846    2     100OV 5999   2020K4       0
-#> 2 773    2     100OV 5999   2020K4       0
-#> 3 840    2     100OV 5999   2020K4       0
-#> 4 787    2     100OV 5999   2020K4       0
-#> 5 820    2     100OV 5999   2020K4       0
-#> 6 851    2     100OV 5999   2020K4       0
+#> 1 846    2     100OV 5999   2024K4       0
+#> 2 773    2     100OV 5999   2024K4       0
+#> 3 840    2     100OV 5999   2024K4       0
+#> 4 787    2     100OV 5999   2024K4       0
+#> 5 820    2     100OV 5999   2024K4       0
+#> 6 851    2     100OV 5999   2024K4       0
 ```
 
 ``` r
@@ -104,52 +100,52 @@ x %>%
 #>         {
 #>             "code": "OMRÅDE",
 #>             "values": [
-#>                 "607"
+#>                 "219"
 #>             ]
 #>         },
 #>         {
 #>             "code": "KØN",
 #>             "values": [
-#>                 "2",
+#>                 "1",
 #>                 "TOT"
 #>             ]
 #>         },
 #>         {
 #>             "code": "ALDER",
 #>             "values": [
-#>                 "10-14",
-#>                 "95-99"
+#>                 "70-74",
+#>                 "10-14"
 #>             ]
 #>         },
 #>         {
 #>             "code": "STATSB",
 #>             "values": [
-#>                 "5356",
-#>                 "5122",
-#>                 "5402"
+#>                 "5142",
+#>                 "5259"
 #>             ]
 #>         },
 #>         {
 #>             "code": "TID",
 #>             "values": [
-#>                 "2011K3"
+#>                 "2023K3"
 #>             ]
 #>         }
 #>     ]
 #> }
 #> 
-#> # A tibble: 6 x 6
+#> # A tibble: 6 × 6
 #>   OMRÅDE KØN   ALDER STATSB TID    INDHOLD
 #>   <chr>  <chr> <chr> <chr>  <chr>    <dbl>
-#> 1 607    2     10-14 5356   2011K3       0
-#> 2 607    2     10-14 5122   2011K3       0
-#> 3 607    2     95-99 5356   2011K3       0
-#> 4 607    2     95-99 5122   2011K3       0
-#> 5 607    TOT   10-14 5356   2011K3       0
-#> 6 607    TOT   10-14 5122   2011K3       0
-#> # A tibble: 0 x 6
-#> # ... with 6 variables: OMRÅDE <chr>, KØN <chr>, ALDER <chr>, STATSB <chr>,
-#> #   TID <chr>, INDHOLD <dbl>
+#> 1 219    1     70-74 5142   2023K3       0
+#> 2 219    1     70-74 5259   2023K3       0
+#> 3 219    1     10-14 5142   2023K3       0
+#> 4 219    1     10-14 5259   2023K3       0
+#> 5 219    TOT   70-74 5142   2023K3       0
+#> 6 219    TOT   70-74 5259   2023K3       0
+#> # A tibble: 1 × 6
+#>   OMRÅDE KØN   ALDER STATSB TID    INDHOLD
+#>   <chr>  <chr> <chr> <chr>  <chr>    <dbl>
+#> 1 219    TOT   10-14 5142   2023K3       3
 ```
 
 ``` r
@@ -157,7 +153,7 @@ tbl_dst(table_id = "FOLK1B", lang = "en") %>%
   select(TID) %>% 
   filter(stringr::str_detect(TID, "K4")) %>% 
   collect()
-#> # A tibble: 13 x 2
+#> # A tibble: 17 × 2
 #>    TID    INDHOLD
 #>    <chr>    <dbl>
 #>  1 2008K4 5505995
@@ -173,12 +169,16 @@ tbl_dst(table_id = "FOLK1B", lang = "en") %>%
 #> 11 2018K4 5806015
 #> 12 2019K4 5827463
 #> 13 2020K4 5837213
+#> 14 2021K4 5867412
+#> 15 2022K4 5928364
+#> 16 2023K4 5959464
+#> 17 2024K4 5989985
 ```
 
 ``` r
 x %>% 
   use_long_names()
-#> # A tibble: 6 x 6
+#> # A tibble: 6 × 6
 #>   REGION SEX   AGE   CITIZENSHIP TIME    NUMBER
 #>   <chr>  <chr> <chr> <chr>       <chr>    <dbl>
 #> 1 000    TOT   IALT  0000        2008K1 5475791

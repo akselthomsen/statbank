@@ -24,3 +24,4 @@ Imports:
     dplyr,
     utils,
     rlang
+URL: https://akselthomsen.github.io/statbank/
