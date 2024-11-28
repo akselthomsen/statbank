@@ -2,29 +2,15 @@
 % Please edit documentation in R/tbl_dst.R
 \name{tbl_dst}
 \alias{tbl_dst}
-\title{Connect to table from statbank.dk}
+\title{Test}
 \usage{
-tbl_dst(table_id, lang = "en")
+tbl_dst(table_id = character(0), lang = "en")
 }
 \arguments{
-\item{table_id}{[character] Name of table from statbank.dk}
+\item{lang}{ass}
 
-\item{lang}{[character] Desired language of output. Possibilites are danish ("da") and english ("en").
-Default is "en.}
-}
-\value{
-a [tbl_dst] object.
+\item{name}{description}
 }
 \description{
-\code{tbl_dst} gather all relevant metadata for the chosen table and returns an object,
-that can be easily manipulated with known dplyr verbs.
-}
-\details{
-Verbs currently supported.....
-}
-\examples{
-
-\dontrun{
-sum("a")
-}
+Test
 }
