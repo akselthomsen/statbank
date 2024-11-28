@@ -1,10 +1,18 @@
 
-create_meta_query <- function(table_id, lang) {
-  opt <- list("table" = table_id, "lang" = lang, "format" = "JSON")
+get_tables <- function(lang) {
 
-  json <- jsonlite::toJSON(opt, auto_unbox = TRUE)
+  list(lang = lang) |>
+    jsonlite::toJSON(auto_unbox = TRUE) |>
+    get_query("tables") |>
+    jsonlite::fromJSON()
+}
 
-  return(json)
+get_metadata <- function(table_id, lang) {
+
+  list(table = table_id, lang = lang, format = "JSON") |>
+    jsonlite::toJSON(auto_unbox = TRUE) |>
+    get_query("tableinfo") |>
+    jsonlite::fromJSON()
 }
 
 create_data_query <- function(x) {

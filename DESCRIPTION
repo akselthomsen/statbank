@@ -1,19 +1,20 @@
 Package: statbank
 Title: Tidy API access to statbank.dk
-Version: 0.0.0.9000
+Version: 0.0.1
 Authors@R: 
     person(given = "Aksel",
            family = "Thomsen",
            role = c("aut", "cre"),
-           email = "akt@dst.dk")
-Description: Tidy API access to statbank.dk.
+           email = "thomsenaksel@gmail.com"
+           )
+Description: Tidy dplyr inspired API access to statbank.dk.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Suggests: 
     testthat (>= 2.1.0),
     covr
-RoxygenNote: 7.1.1
+RoxygenNote: 7.3.2
 Imports: 
     magrittr,
     httr,
@@ -22,4 +23,8 @@ Imports:
     tibble,
     dplyr,
     utils,
-    rlang
+    rlang,
+    S7,
+    glue,
+    cli
+URL: https://akselthomsen.github.io/statbank/

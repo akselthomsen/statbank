@@ -79,7 +79,7 @@ test_that(
         filter(STATSB == "0000") %>%
         use_long_names() %>%
         use_labels() %>%
-        filter(AGE == "Total") %>%
+        filter(AGE == "Age, total") %>%
         use_labels(FALSE) %>%
         use_long_names(FALSE) %>%
         use_bulk_download() %>%
